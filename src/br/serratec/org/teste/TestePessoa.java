@@ -1,25 +1,26 @@
 package br.serratec.org.teste;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import br.serratec.org.model.Importador;
+import br.serratec.org.arquivos.Importador;
 
 public class TestePessoa {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		String arquivo;
-		
 		Scanner sc = new Scanner(System.in);
+		Importador importador = new Importador();
 		
-		System.out.print("Informe o diretório do arquivo: ");
+		System.out.println("::::::::::::::::::: DEPARTAMENTO PESSOAL :::::::::::::::::::");
+		System.out.print("\nInforme o caminho completo do arquivo a ser importado: ");
 		arquivo = sc.next();
+		importador.importarArquivo(arquivo);
 		
-		Importador.importarArquivo(arquivo);
 		
-		System.out.println(arquivo);
-		
-
+		System.out.print("\nInforme o diretório completo do arquivo a ser exportado: ");
+		arquivo = sc.next();
+		importador.gravarArquivo(arquivo);
+		sc.close();
 	}
 
 }
