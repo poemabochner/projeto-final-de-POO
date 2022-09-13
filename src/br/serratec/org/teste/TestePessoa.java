@@ -1,12 +1,8 @@
 package br.serratec.org.teste;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import br.serratec.org.arquivos.Importador;
-import br.serratec.org.model.Funcionario;
-import br.serratec.org.model.ReciboPagamento;
 
 public class TestePessoa {
 
