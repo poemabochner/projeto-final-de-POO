@@ -3,6 +3,7 @@ package br.serratec.org.arquivos;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.Format;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -11,12 +12,12 @@ import java.util.Set;
 import br.serratec.org.enuns.Parentesco;
 import br.serratec.org.model.Dependente;
 import br.serratec.org.model.Funcionario;
-import br.serratec.org.model.ReciboPagamento;
 
-public class Importador {
+public class Importador implements Arquivo{
+	Double INSS;
+	
 	Set<Funcionario> funcionarios = new HashSet<>();
 	Set<Dependente> dependentes = new HashSet<>();
-	ReciboPagamento recibo = new ReciboPagamento();
 	
 	public void importarArquivo(String arquivoEntrada) {
 		File arquivo = new File(arquivoEntrada);
@@ -31,10 +32,10 @@ public class Importador {
 					String vetor[] = funcionario.split(";");
 					String data = vetor[2];
 					LocalDate dataAjustada = LocalDate.parse(data);
-					Double salarioBruto = Double.parseDouble(vetor[3]);
+					String salario = vetor[3];
+					Double salarioBruto = Double.parseDouble(salario);
 					funcionarios.add(new Funcionario(vetor[0], vetor[1], dataAjustada, salarioBruto));
 					System.out.println(funcionario.toString());
-
 
 					// Ler dependentes
 					while (sc.hasNextLine()) {
@@ -60,8 +61,10 @@ public class Importador {
 			// Gravar arquivo de saída
 			PrintWriter gravacaoArquivo = new PrintWriter(arquivoSaida);
 			for (Funcionario funcionario : funcionarios) {
-				Double resultado = 1.;
-				String linha = funcionario.getNome() + ";" + funcionario.getCpf() + ";" + recibo.calculoINSS(resultado) + ";" + funcionario.getDescontoIR() + "\n";
+				funcionario.calculoINSS();
+				funcionario.calculoIR();
+				String linha = String.format("%s;%s;%.2f;%.2f;%.2f;\n", funcionario.getNome(), funcionario.getCpf(), funcionario.getDescontoINSS(), funcionario.getDescontoIR(), funcionario.getSalarioLiquido());
+				System.out.println(linha);
 				gravacaoArquivo.print(linha);
 			}
 				System.out.println("Arquivo gravado com sucesso");

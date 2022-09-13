@@ -17,4 +17,26 @@ public enum IR {
 		this.deducaoIR = deducaoIR;
 	}
 
+	public Double getValorInicialIR() {
+		return valorInicialIR;
+	}
+
+	public Double getValorFinalIR() {
+		return valorFinalIR;
+	}
+
+	public Double getAliquotaIR() {
+		return aliquotaIR;
+	}
+
+	public Double getDeducaoIR() {
+		return deducaoIR;
+	}
+
+	public Double getDependenteIR() {
+		return dependenteIR;
+	}
+
+	
+	
 }
