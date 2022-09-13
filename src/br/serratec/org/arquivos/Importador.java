@@ -11,14 +11,16 @@ import java.util.Set;
 import br.serratec.org.enuns.Parentesco;
 import br.serratec.org.model.Dependente;
 import br.serratec.org.model.Funcionario;
+import br.serratec.org.model.ReciboPagamento;
 
 public class Importador {
 	Set<Funcionario> funcionarios = new HashSet<>();
 	Set<Dependente> dependentes = new HashSet<>();
-
+	ReciboPagamento recibo = new ReciboPagamento();
+	
 	public void importarArquivo(String arquivoEntrada) {
 		File arquivo = new File(arquivoEntrada);
-
+		
 		try {
 			Scanner sc = new Scanner(arquivo);
 
@@ -32,6 +34,7 @@ public class Importador {
 					Double salarioBruto = Double.parseDouble(vetor[3]);
 					funcionarios.add(new Funcionario(vetor[0], vetor[1], dataAjustada, salarioBruto));
 					System.out.println(funcionario.toString());
+
 
 					// Ler dependentes
 					while (sc.hasNextLine()) {
@@ -57,7 +60,8 @@ public class Importador {
 			// Gravar arquivo de saída
 			PrintWriter gravacaoArquivo = new PrintWriter(arquivoSaida);
 			for (Funcionario funcionario : funcionarios) {
-				String linha = funcionario.getNome() + ";" + funcionario.getCpf() + ";" + funcionario.getDescontoINSS() + ";" + funcionario.getDescontoIR() + "\n";
+				Double resultado = 1.;
+				String linha = funcionario.getNome() + ";" + funcionario.getCpf() + ";" + recibo.calculoINSS(resultado) + ";" + funcionario.getDescontoIR() + "\n";
 				gravacaoArquivo.print(linha);
 			}
 				System.out.println("Arquivo gravado com sucesso");

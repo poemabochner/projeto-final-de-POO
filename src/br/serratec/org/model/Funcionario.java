@@ -3,7 +3,7 @@ package br.serratec.org.model;
 import java.time.LocalDate;
 
 public class Funcionario extends Pessoa {
-	private Double salarioBruto;
+	private static Double salarioBruto = 0.;
 	private Double descontoINSS;
 	private Double descontoIR;
 
@@ -17,7 +17,7 @@ public class Funcionario extends Pessoa {
 		return super.toString() + "\nSalario bruto: " + salarioBruto;
 	}
 
-	public Double getSalarioBruto() {
+	public static Double getSalarioBruto() {
 		return salarioBruto;
 	}
 
@@ -28,7 +28,13 @@ public class Funcionario extends Pessoa {
 	public Double getDescontoIR() {
 		return descontoIR;
 	}
-	
-	
+
+	public void setDescontoINSS(Double descontoINSS) {
+		this.descontoINSS = descontoINSS;
+	}
+
+	public void setDescontoIR(Double descontoIR) {
+		this.descontoIR = descontoIR;
+	}
 
 }

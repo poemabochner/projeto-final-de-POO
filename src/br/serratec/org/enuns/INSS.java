@@ -14,5 +14,19 @@ public enum INSS {
 		this.aliquotaINSS = aliquota;
 	}
 
+	public Double getValorInicialINSS() {
+		return valorInicialINSS;
+	}
+
+	public Double getValorFinalINSS() {
+		return valorFinalINSS;
+	}
+
+	public Double getAliquotaINSS() {
+		return aliquotaINSS;
+	}
+	
+	
+
 	
 }
