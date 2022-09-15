@@ -37,7 +37,6 @@ public class Importador implements Arquivo {
 					Funcionario funcionario = new Funcionario(vetorFuncionario[0], vetorFuncionario[1],
 							dataNascimentoFunc, salarioBruto);
 					System.out.println(funcionario);
-
 					// Ler dependentes
 					while (sc.hasNextLine()) {
 						String dependente = sc.nextLine();
@@ -45,13 +44,13 @@ public class Importador implements Arquivo {
 							String vetorDependente[] = dependente.split(";");
 							String dataDependente = vetorDependente[2];
 							LocalDate dataNascimentoDependente = LocalDate.parse(dataDependente);
-							Parentesco parentesco = Parentesco.OUTROS;
+							String parentesco = vetorDependente[3];
 							Integer idade = Period.between(dataNascimentoDependente, LocalDate.now()).getYears();
+
 							try {
 								if (idade < 18) {
 									funcionario.getDependente().add(new Dependente(vetorDependente[0],
-											vetorDependente[1], dataNascimentoDependente, parentesco, funcionarios));
-									System.out.println(dependente);
+											vetorDependente[1], dataNascimentoDependente, Parentesco.valueOf(parentesco), funcionarios));
 								} else {
 									throw new DependenteException();
 								}
@@ -60,6 +59,7 @@ public class Importador implements Arquivo {
 							}
 
 						} else {
+							System.out.println(funcionario.getDependente());
 							break;
 						}
 
