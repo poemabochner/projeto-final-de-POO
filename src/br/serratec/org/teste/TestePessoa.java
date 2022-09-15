@@ -17,13 +17,10 @@ public class TestePessoa {
 		System.out.println("::::::::::::::::::: DEPARTAMENTO PESSOAL :::::::::::::::::::");
 		System.out.print("\nInforme o caminho completo do arquivo a ser importado: ");
 		arquivo = sc.next();
-		try {
-			importador.importarArquivo(arquivo);
-			
-		} catch (Exception e) {
-			System.out.println("Dependentes maiores de 18 anos");
-		}
 
+		
+		importador.importarArquivo(arquivo);
+		
 		
 		System.out.print("\nInforme o diretório completo do arquivo a ser exportado: ");
 		arquivo = sc.next();
