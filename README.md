@@ -1,4 +1,6 @@
-<h1 align="center"> Projeto Final de P.O.O. </h1>
+![trabalho final de poo](https://user-images.githubusercontent.com/105015617/190486844-9c88e25e-eaee-40b5-b63e-defbd461471f.png)
+
+<h1 align="center"> Trabalho Final de P.O.O. </h1>
 <p align="center">
 <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
 </p>
