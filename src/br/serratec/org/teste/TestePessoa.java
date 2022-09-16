@@ -5,9 +5,9 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-
 import br.serratec.org.arquivos.Importador;
 import br.serratec.org.exception.DependenteException;
+import br.serratec.org.model.Processamento;
 
 public class TestePessoa {
 	
@@ -16,6 +16,7 @@ public class TestePessoa {
 		try {
 			String arquivo;
 			Importador importador = new Importador();
+			Processamento processamento = new Processamento();
 
 			arquivo = JOptionPane.showInputDialog(
 					"        TI GÓDX - Departamento Pessoal\n\n Informe o caminho onde está o arquivo:      ",
@@ -23,7 +24,8 @@ public class TestePessoa {
 
 			importador.importarArquivo(arquivo);
 
-
+			processamento.processarFolha();
+			
 			arquivo = JOptionPane.showInputDialog(
 					"        TI GÓDX - Departamento Pessoal\n\n Informe o caminho para salvar o arquivo:      ",
 					"Arquivo/FuncionariosSaida.txt");
@@ -31,7 +33,8 @@ public class TestePessoa {
 			importador.gravarArquivo(arquivo);
 			
 			
-			if (JOptionPane.showConfirmDialog(null, "   TI GÓDX - Departamento Pessoal\n\n Deseja abrir o arquivo?", "Arquivo",
+			
+			if (JOptionPane.showConfirmDialog(null, "   TI GÓDX - Departamento Pessoal\n\n Deseja abrir o arquivo?", "TI GÓDX - Departamento Pessoal",
 			        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					java.awt.Desktop.getDesktop().open(new File(arquivo)); 
 			}
