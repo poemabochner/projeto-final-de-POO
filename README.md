@@ -6,10 +6,10 @@
 </p>
 
 ## 📁 Descrição
-O programa se inicia com a solicitação do nome do arquivo de entrada e saída através do console. Em seguida, ele lê e exporta um arquivo de texto com o formato CSV (os campos de dados são separados por ponto e vírgula ";"). O programa não confere se o conteúdo do arquivo está no padrão correto, assumindo, portanto, que ele sempre estará no formato supracitado.
+O programa se inicia com a solicitação do nome do arquivo de entrada e saída através do console. Em seguida, ele lê e exporta um arquivo de texto com o formato CSV (os campos de dados são separados por ponto e vírgula). O programa não confere se o conteúdo do arquivo está no padrão correto, assumindo, portanto, que ele sempre estará no formato supracitado.
 
 ## 🎯 Objetivo
-O programa visa realizar os cálculos do salário líquido de funcionários de uma empresa.
+O programa visa realizar os cálculos do salário líquido dos funcionários de uma empresa.
 
 ## Autores
 
