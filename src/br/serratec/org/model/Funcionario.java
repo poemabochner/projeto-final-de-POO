@@ -21,10 +21,22 @@ public class Funcionario extends Pessoa {
 		this.salarioBruto = salarioBruto;
 	}
 
+	public String listarDependentes() {
+		String str = "";
+		for (Dependente dependenteSaida : dependente) {
+			str+= dependenteSaida;
+		}
+		
+		return str;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
-		return "\nFuncionario: \nNome: " + nome + "\nCPF: " + cpf + "\nNascimento: " + dataNascimento
-				+ "\nSalário bruto: " + salarioBruto + "\nDependentes: " + dependente + "\n";
+		return "Funcionario: \nNome: " + nome + "\nCPF: " + cpf + "\nNascimento: " + dataNascimento
+				+ "\nSalário bruto: " + salarioBruto + "\n\nDependentes: " + listarDependentes() + "\n\n";
+				
 	}
 
 	public Double getSalarioLiquido() {
