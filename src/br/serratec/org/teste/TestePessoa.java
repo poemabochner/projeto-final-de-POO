@@ -1,33 +1,35 @@
 package br.serratec.org.teste;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.Scanner;
-
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+// javafx
 import br.serratec.org.arquivos.Importador;
 import br.serratec.org.exception.DependenteException;
 
 public class TestePessoa {
 
 	public static void main(String[] args) throws DependenteException {
-		String arquivo;
-		Scanner sc = new Scanner(System.in);
-		Importador importador = new Importador();
-		
-		System.out.println("::::::::::::::::::: DEPARTAMENTO PESSOAL :::::::::::::::::::");
-		System.out.print("\nInforme o caminho completo do arquivo a ser importado: ");
-		arquivo = sc.next();
+		try {
+			String arquivo;
+			Importador importador = new Importador();
 
-		
-		importador.importarArquivo(arquivo);
-		
-		
-		System.out.print("\nInforme o diretório completo do arquivo a ser exportado: ");
-		arquivo = sc.next();
-		System.out.println("");
-		importador.gravarArquivo(arquivo);
+			arquivo = JOptionPane.showInputDialog(
+					"        DEPARTAMENTO PESSOAL\n\n Informe o caminho onde está o arquivo:      ",
+					"Arquivo/Funcionarios.txt");
 
-		sc.close();
+			importador.importarArquivo(arquivo);
+
+			
+			arquivo = JOptionPane.showInputDialog(
+					"        DEPARTAMENTO PESSOAL\n\n Informe o caminho para salvar o arquivo:      ",
+					"Arquivo/FuncionariosSaida.txt");
+			
+			
+			importador.gravarArquivo(arquivo);
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Ocorreu erro ao importar e processar o arquivo!");
+		}
 	}
 
 }
