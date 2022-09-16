@@ -14,7 +14,7 @@ public class Funcionario extends Pessoa {
 	private Double salarioLiquido = 0.;
 	private Double descontoINSS;
 	private Double descontoIR;
-	private List <Dependente> dependente =  new ArrayList<>();
+	private List<Dependente> dependente = new ArrayList<>();
 
 	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
 		super(nome, cpf, dataNascimento);
@@ -23,7 +23,8 @@ public class Funcionario extends Pessoa {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\nSalario bruto: " + salarioBruto;
+		return "\nFuncionario: \nNome: " + nome + "\nCPF: " + cpf + "\nNascimento: " + dataNascimento
+				+ "\nSalário bruto: " + salarioBruto + "\nDependentes: " + dependente + "\n";
 	}
 
 	public Double getSalarioLiquido() {
@@ -33,8 +34,6 @@ public class Funcionario extends Pessoa {
 	public Double getSalarioBruto() {
 		return salarioBruto;
 	}
-	
-	
 
 	public List<Dependente> getDependente() {
 		return dependente;
@@ -47,7 +46,6 @@ public class Funcionario extends Pessoa {
 	public Double getDescontoIR() {
 		return descontoIR;
 	}
-	
 
 	public void calculoINSS() {
 		if (salarioBruto <= INSS.FAIXA1.getValorFinalINSS()) {
@@ -72,28 +70,28 @@ public class Funcionario extends Pessoa {
 		if (salarioBruto <= IR.FAIXA1.getValorFinalIR()) {
 			this.descontoIR = 0.;
 		} else if (salarioBruto >= IR.FAIXA2.getValorInicialIR() && salarioBruto <= IR.FAIXA2.getValorFinalIR()) {
-			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA2.getDependenteIR()) - descontoINSS) * IR.FAIXA2.getAliquotaIR())
-					- IR.FAIXA2.getDeducaoIR());
+			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA2.getDependenteIR()) - descontoINSS)
+					* IR.FAIXA2.getAliquotaIR()) - IR.FAIXA2.getDeducaoIR());
 		} else if (salarioBruto >= IR.FAIXA3.getValorInicialIR() && salarioBruto <= IR.FAIXA3.getValorFinalIR()) {
-			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA3.getDependenteIR()) - descontoINSS) * IR.FAIXA3.getAliquotaIR())
-					- IR.FAIXA3.getDeducaoIR());
+			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA3.getDependenteIR()) - descontoINSS)
+					* IR.FAIXA3.getAliquotaIR()) - IR.FAIXA3.getDeducaoIR());
 		} else if (salarioBruto >= IR.FAIXA4.getValorInicialIR() && salarioBruto <= IR.FAIXA4.getValorFinalIR()) {
-			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA4.getDependenteIR()) - descontoINSS) * IR.FAIXA4.getAliquotaIR())
-					- IR.FAIXA4.getDeducaoIR());
+			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA4.getDependenteIR()) - descontoINSS)
+					* IR.FAIXA4.getAliquotaIR()) - IR.FAIXA4.getDeducaoIR());
 		} else {
-			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA5.getDependenteIR()) - descontoINSS) * IR.FAIXA5.getAliquotaIR())
-					- IR.FAIXA5.getDeducaoIR());
+			this.descontoIR = (((salarioBruto - (dependente.size() * IR.FAIXA5.getDependenteIR()) - descontoINSS)
+					* IR.FAIXA5.getAliquotaIR()) - IR.FAIXA5.getDeducaoIR());
 		}
 
 	}
-	
+
 	public void adicionarDependente(Dependente dependente) throws DependenteException {
 		Integer idade = Period.between(dependente.getDataNascimento(), LocalDate.now()).getYears();
 		if (idade < 18) {
 			this.dependente.add(dependente);
 		} else {
 			throw new DependenteException();
-		}	
+		}
 	}
 
 }

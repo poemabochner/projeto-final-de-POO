@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import br.serratec.org.enuns.Parentesco;
 import br.serratec.org.exception.DependenteException;
 import br.serratec.org.model.Dependente;
@@ -36,7 +38,6 @@ public class Importador implements Arquivo {
 
 					Funcionario funcionario = new Funcionario(vetorFuncionario[0], vetorFuncionario[1],
 							dataNascimentoFunc, salarioBruto);
-					System.out.println(funcionario);
 					// Ler dependentes
 					while (sc.hasNextLine()) {
 						String dependente = sc.nextLine();
@@ -49,47 +50,55 @@ public class Importador implements Arquivo {
 
 							try {
 								if (idade < 18) {
-									funcionario.getDependente().add(new Dependente(vetorDependente[0],
-											vetorDependente[1], dataNascimentoDependente, Parentesco.valueOf(parentesco), funcionarios));
+									funcionario.getDependente()
+											.add(new Dependente(vetorDependente[0], vetorDependente[1],
+													dataNascimentoDependente, Parentesco.valueOf(parentesco),
+													funcionarios));
 								} else {
 									throw new DependenteException();
 								}
 							} catch (Exception e) {
-								System.out.println("Dependente não foi adicionado");
+								JOptionPane.showMessageDialog(null, "O dependente " + vetorDependente[0] + " não foi importado pois possui mais de 18 anos!");
 							}
 
 						} else {
-							System.out.println(funcionario.getDependente());
 							break;
 						}
 
 					}
-
+					
 					funcionarios.add(funcionario);
 				}
 			}
 			sc.close();
 		} catch (IOException e) {
-			System.out.println("Ocorreu ao ler o arquivo.");
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro ao ler o arquivo :(");
 		}
+		JOptionPane.showMessageDialog(null, funcionarios);
 	}
 
 	public void gravarArquivo(String arquivoSaida) {
 		try {
 			// Gravar arquivo de saída
 			PrintWriter gravacaoArquivo = new PrintWriter(arquivoSaida);
+			String saida = null;
+			
 			for (Funcionario funcionario : funcionarios) {
 				funcionario.calculoINSS();
 				funcionario.calculoIR();
 				String linha = String.format("%s;%s;%.2f;%.2f;%.2f;\n", funcionario.getNome(), funcionario.getCpf(),
 						funcionario.getDescontoINSS(), funcionario.getDescontoIR(), funcionario.getSalarioLiquido());
-				System.out.println(linha);
 				gravacaoArquivo.print(linha);
+				
+				saida = String.format("\nNome: %s \nCPF: %s \nDesconto INSS: %.2f \nDesconto IRRF: %.2f \nSalário líquido: %.2f\n\n", funcionario.getNome(), funcionario.getCpf(),
+						funcionario.getDescontoINSS(), funcionario.getDescontoIR(), funcionario.getSalarioLiquido());
+
+				JOptionPane.showMessageDialog(null, saida, "Recibo de pagamento", JOptionPane.PLAIN_MESSAGE);
 			}
-			System.out.println("\nArquivo gravado com sucesso");
 			gravacaoArquivo.close();
+			JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso :)");
 		} catch (IOException e) {
-			System.out.println("Ocorreu um erro ao gravar o arquivo.");
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro ao gravar o arquivo :(");
 		}
 	}
 }

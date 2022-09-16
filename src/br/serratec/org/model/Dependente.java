@@ -17,10 +17,14 @@ public class Dependente extends Pessoa {
 		this.parentesco = parentesco;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "\nDependente: " + nome + "\nParentesco: " + parentesco;
+		return "\n Nome: " + nome + "\n CPF: " + cpf + "\n Nascimento: " + dataNascimento + "\n Parentesco: " + parentesco + "\n";
 	}
+
+
 
 	public Parentesco getParentesco() {
 		return parentesco;
