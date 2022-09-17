@@ -7,12 +7,9 @@ import br.serratec.org.enuns.Parentesco;
 
 public class Dependente extends Pessoa {
 	private Parentesco parentesco;
-	private Funcionario funcionario;
-
 	
 
-	public Dependente(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco,
-			Set<Funcionario> funcionarios) {
+	public Dependente(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco) {
 		super(nome, cpf, dataNascimento);
 		this.parentesco = parentesco;
 	}
@@ -29,12 +26,6 @@ public class Dependente extends Pessoa {
 	public Parentesco getParentesco() {
 		return parentesco;
 	}
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-	
-	
 	
 
 }

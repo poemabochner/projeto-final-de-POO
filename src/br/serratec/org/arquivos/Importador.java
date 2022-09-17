@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -18,10 +19,10 @@ import br.serratec.org.model.Dependente;
 import br.serratec.org.model.Funcionario;
 
 public class Importador implements Arquivo {
-	ImageIcon icon = new ImageIcon("img/dp.png");
+	ImageIcon icon = new ImageIcon("Imagem/dp.png");
 	Set<Funcionario> funcionarios = new HashSet<>();
-	
-	public void importarArquivo(String arquivoEntrada) throws DependenteException {
+
+	public String importarArquivo(String arquivoEntrada) throws DependenteException {
 		File arquivo = new File(arquivoEntrada);
 
 		try {
@@ -53,14 +54,15 @@ public class Importador implements Arquivo {
 								if (idade < 18) {
 									funcionario.getDependente()
 											.add(new Dependente(vetorDependente[0], vetorDependente[1],
-													dataNascimentoDependente, Parentesco.valueOf(parentesco),
-													funcionarios));
+													dataNascimentoDependente, Parentesco.valueOf(parentesco)));
 								} else {
 									throw new DependenteException();
 								}
 							} catch (Exception e) {
-								JOptionPane.showMessageDialog(null, "O dependente " + vetorDependente[0]
-										+ " não foi importado pois possui mais de 18 anos!", "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
+								JOptionPane.showMessageDialog(null,
+										"O dependente " + vetorDependente[0]
+												+ " não foi importado pois possui mais de 18 anos!",
+										"TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
 							}
 
 						} else {
@@ -74,13 +76,17 @@ public class Importador implements Arquivo {
 			}
 			sc.close();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro ao ler o arquivo!", "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro ao ler o arquivo!", "TI GÓDX - Departamento Pessoal",
+					JOptionPane.PLAIN_MESSAGE, icon);
 		}
 		String str = "";
 		for (Funcionario funcionarioSaida : funcionarios) {
 			str += funcionarioSaida;
 		}
-		JOptionPane.showMessageDialog(null, "\n" + str, "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
+		JOptionPane.showMessageDialog(null, "\n" + str, "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE,
+				icon);
+
+		return str;
 	}
 
 	public void gravarArquivo(String arquivoSaida) {
@@ -106,14 +112,17 @@ public class Importador implements Arquivo {
 						funcionario.getNome(), funcionario.getCpf(), funcionario.getSalarioBruto(),
 						funcionario.getDescontoINSS(), funcionario.getDescontoIR(), funcionario.getSalarioLiquido());
 
-				JOptionPane.showMessageDialog(null, str, "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
+				JOptionPane.showMessageDialog(null, str, "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE,
+						icon);
 			}
 
 			gravacaoArquivo.close();
 
-			JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso!", "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
+			JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso!   ", "TI GÓDX - Departamento Pessoal",
+					JOptionPane.PLAIN_MESSAGE, icon);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro ao gravar o arquivo!", "TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro ao gravar o arquivo!",
+					"TI GÓDX - Departamento Pessoal", JOptionPane.PLAIN_MESSAGE, icon);
 		}
 	}
 }
