@@ -6,15 +6,12 @@
 package br.serratec.org.teste;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import br.serratec.org.arquivos.Importador;
 import br.serratec.org.exception.DependenteException;
-import br.serratec.org.model.Funcionario;
 import br.serratec.org.model.Mensagem;
 
 public class TestePessoa {
