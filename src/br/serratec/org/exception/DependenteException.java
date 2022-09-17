@@ -5,6 +5,6 @@ public class DependenteException extends Exception {
 //Não pode existir dependentes com o mesmo CPF
 
 	public DependenteException() {
-		
+		System.out.println("Dependente maior de 18 anos!");
 	}
 }

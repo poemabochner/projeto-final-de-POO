@@ -2,8 +2,9 @@ package br.serratec.org.model;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import br.serratec.org.enuns.INSS;
 import br.serratec.org.enuns.IR;
@@ -14,7 +15,7 @@ public class Funcionario extends Pessoa {
 	private Double salarioLiquido = 0.;
 	private Double descontoINSS;
 	private Double descontoIR;
-	private List<Dependente> dependente = new ArrayList<>();
+	Set<Dependente> dependente = new HashSet<>();
 
 	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
 		super(nome, cpf, dataNascimento);
@@ -47,7 +48,7 @@ public class Funcionario extends Pessoa {
 		return salarioBruto;
 	}
 
-	public List<Dependente> getDependente() {
+	public Set<Dependente> getDependente() {
 		return dependente;
 	}
 
